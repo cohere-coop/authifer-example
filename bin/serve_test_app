@@ -1,3 +1,0 @@
-#!/bin/bash
-
-PORT=5001 bundle exec ruby test/app/implements_oauth2.rb

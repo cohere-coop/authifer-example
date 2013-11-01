@@ -1,33 +1,22 @@
 require 'sinatra'
+require 'authifer'
 require './initializers/dotenv'
-require './initializers/database'
-require './initializers/oauth_provider'
 
-Dir['{models,routes,helpers}/**/*.rb'].each do |filename|
-  require File.expand_path(filename)
-end
+Authifer.connect_to_database(ENV['DATABASE_URL'])
 
-enable :sessions
+use Authifer::App
 
 helpers do
-  include AuthenticationHelper
-  include OAuthHelper
-  include DataHelper
-
-  def display
-    @renderer ||= Renderer.new(self)
-  end
-
-  def redirect_url
-    @redirect_url ||= params[:redirect_url] || "/"
-  end
+  include Authifer::AuthenticationHelper
+  include Authifer::Paths
 end
 
 get '/' do
-  display.home
-end
-
-post '/users' do
-  user = create_user(params[:user])
-  complete_login(user, user.persisted?)
+  if logged_in?
+    "<a href='#{ delete_session_path }'>log out</a>"
+  else
+    "<a href='#{ new_session_path }'>log in</a>" +
+    " or " +
+    "<a href='#{ new_user_path }'>register</a>"
+  end
 end
