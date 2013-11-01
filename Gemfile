@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem 'authifer', path: '../authifer'
+gem 'authifer'
 gem 'pg'
 
 group :development, :test do
