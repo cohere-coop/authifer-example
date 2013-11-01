@@ -1,9 +1,10 @@
-require './auth_makeheadspace_app'
-require 'sinatra/activerecord/rake'
+require 'authifer/tasks'
+require './initializers/dotenv'
 
-namespace :db do
-  task :seed do
-    require './db/seeds'
-    Seeder.seed
-  end
+desc "includes the full application environment"
+task :environment do
+  require './auth_makeheadspace_app'
 end
+
+Rake::Task['authifer:db:migrate'].enhance [:environment]
+
