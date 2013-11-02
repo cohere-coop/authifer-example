@@ -12,11 +12,5 @@ helpers do
 end
 
 get '/' do
-  if logged_in?
-    "<a href='#{ delete_session_path }'>log out</a>"
-  else
-    "<a href='#{ new_session_path }'>log in</a>" +
-    " or " +
-    "<a href='#{ new_user_path }'>register</a>"
-  end
+  erb logged_in? ? :home : :guest_home
 end
