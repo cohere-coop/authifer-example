@@ -8,6 +8,7 @@ Authifer.connect_to_database(ENV['DATABASE_URL'])
 use Authifer::App
 
 helpers do
+  include Authifer::DataHelper
   include Authifer::AuthenticationHelper
   include Authifer::Paths
 end
