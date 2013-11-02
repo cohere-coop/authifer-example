@@ -1,0 +1,19 @@
+label, input, button {
+  display: block;
+}
+label, button, input {
+  margin-top: .5em;
+
+}
+
+input, button {
+  font-size: 1em;
+  font-family: "Merriweather" serif;
+  height: 2em;
+  width: 100%;
+}
+
+button {
+  margin-top: .5em;
+}
+
